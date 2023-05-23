@@ -1,9 +1,11 @@
+import React, { useState } from 'react';
 import ExpenseItem from './components/ExpenseItem';
 import NewExpense from './components/NewExpense/NewExpense';
+
 function App() {
-  const expenses = [
+  const [expenses, setExpenses] = useState([
     {
-      title: 'A toilet Paper',
+      title: 'House Rent',
       amount: 200,
       date: new Date(2023, 5, 18),
       location: "Bangalore,India"
@@ -18,7 +20,7 @@ function App() {
       title: 'Fuel',
       amount: 700,
       date: new Date(2023, 5, 12),
-      location: "Dhramsala,India"
+      location: "Dharamsala,India"
     },
     {
       title: 'Food',
@@ -26,10 +28,15 @@ function App() {
       date: new Date(2023, 5, 12),
       location: "Haridwar,India"
     }
-  ];
+  ]);
+
+  const addExpenseHandler = (expense) => {
+    setExpenses((prevExpenses) => [...prevExpenses, expense]);
+  };
+
   return (
-    <div >
-     <NewExpense/>
+    <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
       {expenses.map((expense, index) => (
         <ExpenseItem
           key={index}
